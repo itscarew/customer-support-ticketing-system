@@ -5,10 +5,11 @@ Fliqpay test . Create the architecture and design of a customer support ticketin
 
 * Introduction
 * Key Features
+* Installation
 * Technology Stack
 * Dependencies
 * Project Structure
-* Installation
+
 
 ## Introduction to Customer Support Ticketing System
 
@@ -31,6 +32,17 @@ Admin
 
 Authentication
 * Users use JWT for authetication.
+
+
+## Installation
+
+To get started
+  * Clone this repository to your local machine using https://github.com/itscarew/customer-support-ticketing-system.git
+  * Navigate to the root of the cloned local repository.
+  * Run npm install to install the dependencies.
+  * Run npm start to run the application.
+  * Run npm dev to run the application from the server.ts file
+
 
 ## Technology Stack
 * Node js 
@@ -60,35 +72,6 @@ Authentication
 * typescript
 
 ## Project Structure 
-
-├─dist/
-├─node_modules/
-├─ src/
-|  ├─ auth/
-|  |  ├─ auth-role.ts
-|  |  ├─ check-auth.ts
-|  |  ├─ role.ts
-│  ├─ controllers/
-|  |  ├─ comments.ts
-|  |  ├─ reports.ts
-|  |  ├─ tickets.ts
-|  |  ├─ users.ts
-│  ├─ download/
-|  |  ├─ tickets.csv
-│  ├─ models/
-|  |  ├─ comments.ts
-|  |  ├─ tickets.ts
-|  |  ├─ user.ts
-│  ├─ routes/
-|  |  ├─ comments.ts
-|  |  ├─ reports.ts
-|  |  ├─ tickets.ts
-|  |  ├─ user.ts
-│  └─ server.ts
-├─ package.json
-├─ package-lock.json
-├─ tsconfig.json
-
 dist/
 
 This is where all the typescript files are transpiled too.
@@ -107,21 +90,14 @@ models/
 Here lies the structure of how each documents are going to be from the users to the comments and the tickets.
 routes/
 
-Here lies the route and path to be type for each of the CRUD operations to be performed
+Here lies the route and path to be type for each of the CRUD operations to be performed.
+tests/
+
+This folder containes the test files tested with jest.
 server.ts
 
 The app's main entry point.
 
-
-
-## Installation
-
-To get started
-  * Clone this repository to your local machine using https://github.com/itscarew/customer-support-ticketing-system.git
-  * Navigate to the root of the cloned local repository.
-  * Run npm install to install the dependencies.
-  * Run npm start to run the application.
-  * Run npm dev to run the application from the server.ts file
 
 
 
