@@ -12,12 +12,7 @@ Fliqpay test . Create the architecture and design of a customer support ticketin
 
 ## Introduction to Customer Support Ticketing System
 
-This is blah blh
-
-### Prerequisites
-
-What things you need to install the software and how to install them
-
+This is a customer support ticketing API designed to allow customers create support request and also have conversations between them and the support agent.
 
 ## Key Features
 
@@ -44,14 +39,6 @@ Authentication
 * Javascript
 * Typescript
 
-## Authentication and Code Base Organization
-* Written in ES6 (ECMAScript 2015)
-* BABEL transpiler
-* Json Web Tokens (JWT) for authentication.
-
-## Code Quality
-* Uses ESLINT which was configured to use Airbnb-base rules for ensuring code quality.
-
 ## Database Used
 * Mongo db Atlas
 
@@ -73,6 +60,58 @@ Authentication
 * typescript
 
 ## Project Structure 
+
+├─dist/
+├─node_modules/
+├─ src/
+|  ├─ auth/
+|  |  ├─ auth-role.ts
+|  |  ├─ check-auth.ts
+|  |  ├─ role.ts
+│  ├─ controllers/
+|  |  ├─ comments.ts
+|  |  ├─ reports.ts
+|  |  ├─ tickets.ts
+|  |  ├─ users.ts
+│  ├─ download/
+|  |  ├─ tickets.csv
+│  ├─ models/
+|  |  ├─ comments.ts
+|  |  ├─ tickets.ts
+|  |  ├─ user.ts
+│  ├─ routes/
+|  |  ├─ comments.ts
+|  |  ├─ reports.ts
+|  |  ├─ tickets.ts
+|  |  ├─ user.ts
+│  └─ server.ts
+├─ package.json
+├─ package-lock.json
+├─ tsconfig.json
+
+dist/
+
+This is where all the typescript files are transpiled too.
+
+auth/
+This older contains all the authentication a user needs to perform any operation.
+
+contoller/
+
+Contain all the functions for each of the request and operations.
+download/
+
+The download folder contains the csv file for all the tickets closed in the last one month.
+models/
+
+Here lies the structure of how each documents are going to be from the users to the comments and the tickets.
+routes/
+
+Here lies the route and path to be type for each of the CRUD operations to be performed
+server.ts
+
+The app's main entry point.
+
 
 
 ## Installation
