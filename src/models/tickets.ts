@@ -8,7 +8,6 @@ const status = {
 
 //This is the interface of the Ticket document
 export interface ITicket extends mongoose.Document {
-  _id: number,
   description: string; 
   subject: string,
   createdAt: Date,
@@ -20,7 +19,6 @@ export interface ITicket extends mongoose.Document {
 
 //This is the Schema for a Ticket, the sructure of how the ticket document is going to be.
 const TicketSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
   description: {
     type: String,
     trim: true,

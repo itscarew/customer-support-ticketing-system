@@ -1,9 +1,10 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.role = void 0;
 //roles and priviledges assigned the users
-const role = {
+exports.role = {
     ADMIN: "admin",
     AGENT: "agent",
     BASIC: "basic",
 };
-module.exports = role;
 //# sourceMappingURL=role.js.map

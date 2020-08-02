@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.downloadReports = void 0;
-const { Parser } = require("json2csv");
+const json2csv_1 = require("json2csv");
 const fs_1 = __importDefault(require("fs"));
 const tickets_1 = __importDefault(require("../models/tickets"));
 exports.downloadReports = (req, res) => {
@@ -30,9 +30,9 @@ exports.downloadReports = (req, res) => {
             "status",
             "user",
         ];
-        const json2csvParser = new Parser({ fields });
+        const json2csvParser = new json2csv_1.Parser({ fields });
         const csv = json2csvParser.parse(ticket);
-        fs_1.default.writeFile("./download/tickets.csv", csv, function (err) {
+        fs_1.default.writeFile("./src/download/tickets.csv", csv, function (err) {
             if (err)
                 throw err;
             res.setHeader("Content-Type", "text/csv");
@@ -41,7 +41,7 @@ exports.downloadReports = (req, res) => {
     })
         .catch((err) => {
         res.status(500).json({
-            message: "Tickets not saved",
+            err: "Tickets not saved",
         });
     });
 };

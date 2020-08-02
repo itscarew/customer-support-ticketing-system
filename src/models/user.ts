@@ -1,21 +1,18 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
-import role from "../auth/role"
+import {role} from "../auth/role";
 
 //This is the interface of the user document
 export interface IUser extends mongoose.Document {
-  _id: number,
-  name: string; 
-  email: string,
-  password: string,
-  joined:Date,
-  role : string
-};
-
+  name: string;
+  email: string;
+  password: string;
+  joined: Date;
+  role: string;
+}
 
 //This is the Schema for a User, the sructure of how the user document is going to be.
 const UserSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
   name: {
     type: String,
     minlength: [6, "Name is too short!"],
@@ -36,8 +33,9 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: role.BASIC,
     enum: [role.BASIC, role.AGENT, role.ADMIN],
-  }
+  },
 });
 
 const User = mongoose.model<IUser>("User", UserSchema);
+
 export default User;

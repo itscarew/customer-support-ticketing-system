@@ -13,7 +13,7 @@ const reports_1 = __importDefault(require("./routes/reports"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 //connection to the the Database
-mongoose_1.default.connect(`mongodb+srv://itscarew:${process.env.MONGOPASSW0RD}@customer-support-ticket.kk7ya.mongodb.net/customer-support-ticket?retryWrites=true&w=majority`, {
+mongoose_1.default.connect(`mongodb://localhost:27017/supportTicketApp`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,

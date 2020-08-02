@@ -9,14 +9,13 @@ import {
 const router = express.Router();
 
 import checkAuth from "../auth/check-auth";
-import authRole from "../auth/auth-role";
-import role from "../auth/role";
+import checkAdmin from "../auth/check-admin";
 
 //route to get all comments
-router.get("/", checkAuth, authRole(role.ADMIN, role.AGENT), comments_get_all);
+router.get("/", checkAuth, checkAdmin, comments_get_all);
 
 //route to post a single comment
-router.post("/", checkAuth, comments_create_comment);
+router.post("/ticket/:ticketId", checkAuth, comments_create_comment);
 
 //route to get a particular comment
 router.get("/:commentId", checkAuth, comments_get_comment);

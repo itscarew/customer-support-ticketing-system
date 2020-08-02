@@ -2,10 +2,7 @@ import express from "express";
 const router = express.Router();
 
 import checkAuth from "../auth/check-auth";
-import authRole from "../auth/auth-role";
-
-import role from "../auth/role";
-
+import checkAdmin from "../auth/check-admin";
 
 import {
   tickets_get_all,
@@ -17,7 +14,7 @@ import {
 } from "../controllers/tickets";
 
 //route to get all tickets
-router.get("/", checkAuth, authRole(role.ADMIN, role.AGENT), tickets_get_all);
+router.get("/", checkAuth, checkAdmin, tickets_get_all);
 
 //route to create a ticket
 router.post("/", checkAuth, tickets_create_ticket);
@@ -35,7 +32,7 @@ router.delete("/:ticketId", checkAuth, tickets_delete_ticket);
 router.patch(
   "/:ticketId/status",
   checkAuth,
-  authRole(role.ADMIN),
+  checkAdmin,
   tickets_update_ticket_status
 );
 

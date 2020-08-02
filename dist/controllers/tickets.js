@@ -4,71 +4,77 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.tickets_update_ticket_status = exports.tickets_delete_ticket = exports.tickets_for_a_user = exports.tickets_get_ticket = exports.tickets_create_ticket = exports.tickets_get_all = void 0;
-const mongoose_1 = __importDefault(require("mongoose"));
 const tickets_1 = __importDefault(require("../models/tickets"));
 exports.tickets_get_all = (req, res) => {
     tickets_1.default.find()
         .exec()
         .then((ticket) => {
-        res.status(200).json({ data: ticket });
+        res.status(200).json({ tickets: ticket });
     })
         .catch((err) => {
         res.status(500).json({
-            message: err,
+            err: err,
         });
     });
 };
 exports.tickets_create_ticket = (req, res) => {
     const ticket = new tickets_1.default({
-        _id: mongoose_1.default.Types.ObjectId(),
         description: req.body.description,
         subject: req.body.subject,
-        user: req.body.user,
+        user: req.user.userId,
     });
     return ticket
         .save()
         .then((ticket) => {
         res.status(201).json({
             message: "Ticket created successfully",
-            data: ticket,
+            ticket: ticket,
         });
     })
         .catch((err) => {
         res.status(500).json({
-            message: "Something went wrong, Ticket not created",
+            err: "Something went wrong, Ticket not created",
         });
     });
 };
 exports.tickets_get_ticket = (req, res) => {
     const { ticketId } = req.params;
-    tickets_1.default.find({ _id: ticketId })
+    tickets_1.default.findOne({ _id: ticketId })
         .populate("user", "_id name email")
         .exec()
         .then((ticket) => {
-        res.status(200).json({
-            message: "Ticket found",
-            data: ticket[0],
-        });
+        if (!ticket) {
+            res.status(404).json({
+                err: "Ticket does not exists",
+            });
+        }
+        else {
+            res.status(200).json({
+                message: "Ticket found",
+                ticket: ticket,
+            });
+        }
     })
         .catch((err) => {
-        res.status(400).json({
-            message: "No ticket found",
+        res.status(404).json({
+            err: "No ticket found",
         });
     });
 };
 exports.tickets_for_a_user = (req, res) => {
     const { userId } = req.params;
     tickets_1.default.find({ user: userId })
+        .select("_id description subject createdAt closedAt status")
         .exec()
         .then((ticket) => {
         res.status(200).json({
             message: `All Tickets for ${userId} user`,
-            data: ticket,
+            tickets: ticket,
         });
     })
         .catch((err) => {
         res.status(400).json({
-            message: "No ticket found",
+            err: "No ticket found",
         });
     });
 };
@@ -82,8 +88,8 @@ exports.tickets_delete_ticket = (req, res) => {
         });
     })
         .catch((err) => {
-        res.status(400).json({
-            message: "No ticket found",
+        res.status(404).json({
+            err: "No ticket found",
         });
     });
 };
@@ -98,7 +104,7 @@ exports.tickets_update_ticket_status = (req, res) => {
     })
         .catch((err) => {
         res.status(500).json({
-            message: "Something went wrong, ticket status not updated",
+            err: "Something went wrong, ticket status not updated",
         });
     });
 };

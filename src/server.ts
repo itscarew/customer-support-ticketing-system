@@ -13,14 +13,12 @@ import dotenv from "dotenv"
 dotenv.config();
 
 //connection to the the Database
-mongoose.connect(
-  `mongodb+srv://itscarew:${process.env.MONGOPASSW0RD}@customer-support-ticket.kk7ya.mongodb.net/customer-support-ticket?retryWrites=true&w=majority`,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  }
-);
+mongoose.connect(`mongodb://localhost:27017/supportTicketApp`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+});
+
 
 //initialize express
 const app:Application = express();

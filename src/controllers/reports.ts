@@ -1,4 +1,4 @@
-const { Parser } = require("json2csv");
+import {Parser} from "json2csv"
 import fs from "fs"
 import { Response} from "express"
 
@@ -8,6 +8,7 @@ export const downloadReports = (req:any, res:Response) => {
   const date = new Date();
   date.toLocaleDateString();
   date.setMonth(date.getMonth() - 1);
+
 
   Ticket.find({
     closedAt: {
@@ -32,7 +33,7 @@ export const downloadReports = (req:any, res:Response) => {
       const json2csvParser = new Parser({ fields });
       const csv = json2csvParser.parse(ticket);
 
-      fs.writeFile("./download/tickets.csv", csv, function (err) {
+      fs.writeFile("./src/download/tickets.csv", csv, function (err) {
         if (err) throw err;
         res.setHeader("Content-Type", "text/csv");
         res.send(csv);
@@ -40,7 +41,7 @@ export const downloadReports = (req:any, res:Response) => {
     })
     .catch((err) => {
       res.status(500).json({
-        message: "Tickets not saved",
+        err: "Tickets not saved",
       });
     });
 };
